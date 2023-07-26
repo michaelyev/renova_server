@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Product } from './entities/product.entity';
 import mongoose from 'mongoose';
 
-const generateUrl = (string) => {
+const generateUrl = (string: string) => {
   return string.toLowerCase().replace(/ /g, '-')
 }
 

@@ -1,5 +1,5 @@
-import { Schema,  Prop, SchemaFactory  } from "@nestjs/mongoose";
-import { now } from "mongoose";
+import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
+import { now } from 'mongoose';
 
 enum Categories {
   Countertops = 'countertops',
@@ -7,8 +7,7 @@ enum Categories {
   Tile = 'tile'
 }
 
-
-@Schema()
+@Schema({ versionKey: false, toJSON: { transform: (doc, ret) => { delete ret._id; } } })
 export class Blog{
 
     @Prop({type: String, unique: true})
@@ -29,9 +28,8 @@ export class Blog{
     @Prop({type: String, required: true})
     body: string
 
-    @Prop({ type: String, enum: Categories })
+    @Prop({ type: String, enum: Categories, required: true })
     type: Categories;
-
 }
 
-export const BlogSchema = SchemaFactory.createForClass(Blog)
+export const BlogSchema = SchemaFactory.createForClass(Blog);
