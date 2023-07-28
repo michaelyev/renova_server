@@ -17,14 +17,12 @@ export class BlogsController {
     return this.blogsService.getAllBlogs()
   }
 
-  /* @Get('/post-name/:url')
+
+  @Get(':url')
   findBlog(@Param('url') url: string){
     return this.blogsService.getBlog(url)
-  } */
-
-  @Get(':category')
-  findCategory(@Param('category') category: string){
-    return this.blogsService.getBlogByCategory(category)
   }
+
+  
 
 }

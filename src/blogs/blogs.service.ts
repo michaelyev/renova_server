@@ -9,6 +9,8 @@ const generateUrl = (string: string) => {
     return string.toLowerCase().replace(/ /g, '-')
   }
 
+  const types = ['cabinets', 'countertops', 'tile']
+
 @Injectable()
 export class BlogsService {
 
@@ -26,13 +28,18 @@ export class BlogsService {
         return await this.blogs.find()
     }
 
+
     async getBlog(url: string){
-        return await this.blogs.find().where({url})
+        
+      if (!types.includes(url)) {
+        return await this.blogs.findOne().where({ url });
+      }
+      return await this.blogs.find().where({ type: url });
+
+      
     }
 
-    async getBlogByCategory(category: string){
-        return await this.blogs.find().where({type: category})
-    }
+    
 
 
 
