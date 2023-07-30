@@ -17,11 +17,8 @@ export class ProductsController {
     return this.productsService.getAllProducts()
   }
 
-  
-
-
-  @Get('/:category')
-  findCategory(@Param("category") category : string){
-    return this.productsService.getProductsByCategory(category)
+  @Get('/:url')
+  findProducts(@Param("url") category : string){
+    return this.productsService.getProduct(category)
   }
 }

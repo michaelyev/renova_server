@@ -8,6 +8,9 @@ const generateUrl = (string: string) => {
   return string.toLowerCase().replace(/ /g, '-')
 }
 
+const types = ['cabinets', 'countertops', 'tile']
+
+
 @Injectable()
 export class ProductsService {
 
@@ -15,8 +18,8 @@ export class ProductsService {
   }
 
   async createProduct(createProductDto: CreateProductDto) {
-    const { manufacturer, model } = createProductDto;
-    createProductDto.url = generateUrl(manufacturer) + '_' +generateUrl(model)
+    const { manufacturer, title } = createProductDto;
+    createProductDto.url = generateUrl(manufacturer) + '_' +generateUrl(title)
     return await this.products.create(createProductDto)
   }
 
@@ -24,8 +27,16 @@ export class ProductsService {
     return await this.products.find()
   }
 
-  async getProductsByCategory(category: string) {
-    return await this.products.find().where({ type: category })
+ 
+
+  async getProduct(url: string){
+        
+    if (!types.includes(url)) {
+      return await this.products.findOne().where({ url });
+    }
+    return await this.products.find().where({ type: url });
+
+    
   }
 
 }
